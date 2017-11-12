@@ -28,7 +28,7 @@ class VKApi {
         infoDiv.querySelector('.vk-header').innerHTML = name;
       }
     });
-    VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5, fields: first_name,last_name,photo}, (r) => {
+    VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5, fields: 'first_name,last_name,photo'}, (r) => {
       const list = infoDiv.querySelector('.vk-friends').children;
       if(r.response) {
         console.log(r);
