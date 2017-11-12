@@ -49,12 +49,13 @@ class VKApi {
     });
   }
 
-  _handleClick() {
+  _handleClick(event) {
+    if (event.target.className !== 'vk-button') return;
+
     VK.Auth.login((response) => {
       if (response.session) {
         this._getUsersFriends(response.session.mid);
       }
-      this._el.removeEventListener('click', this._handleClick.bind(this));
     });
   }
 }

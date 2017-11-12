@@ -209,14 +209,15 @@ var VKApi = function () {
     }
   }, {
     key: '_handleClick',
-    value: function _handleClick() {
+    value: function _handleClick(event) {
       var _this = this;
+
+      if (event.target.className !== 'vk-button') return;
 
       VK.Auth.login(function (response) {
         if (response.session) {
           _this._getUsersFriends(response.session.mid);
         }
-        _this._el.removeEventListener('click', _this._handleClick.bind(_this));
       });
     }
   }]);
