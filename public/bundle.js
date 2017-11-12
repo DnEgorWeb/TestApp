@@ -169,7 +169,7 @@ var VKApi = function () {
     this._el.addEventListener('click', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
-          _this._getUsersFriends.bind(_this, response.session.mid);
+          _this._getUsersFriends(response.session.mid);
         }
       });
     });

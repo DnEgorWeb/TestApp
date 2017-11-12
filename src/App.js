@@ -11,7 +11,7 @@ class VKApi {
     this._el.addEventListener('click', () => {
       VK.Auth.login((response) => {
         if (response.session) {
-          this._getUsersFriends.bind(this, response.session.mid);
+          this._getUsersFriends(response.session.mid);
         }
       });
     });
