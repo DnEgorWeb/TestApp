@@ -17,8 +17,9 @@ class VKApi {
 
   _getUsersFriends(id) {
     const infoDiv = document.querySelector('.vk-information');
+    const vkButton = document.querySelector('.vk-button');
 
-    document.querySelector('.vk-button').classList.toggle('hidden');
+    if (!vkButton.classList.contains('hidden')) vkButton.classList.add('hidden');
     infoDiv.classList.toggle('hidden');
 
     VK.Api.call('users.get', {user_ids: id}, (r) => {
@@ -31,7 +32,7 @@ class VKApi {
       const list = infoDiv.querySelector('.vk-friends').children;
       if(r.response) {
         console.log(r.response);
-        r.response.items.forEach((item, i) => {
+        r.response.forEach((item, i) => {
           list[i].innerHTML = `${item.first_name} ${item.last_name}`;
         });
       }

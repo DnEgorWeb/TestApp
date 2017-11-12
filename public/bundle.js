@@ -177,8 +177,9 @@ var VKApi = function () {
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
       var infoDiv = document.querySelector('.vk-information');
+      var vkButton = document.querySelector('.vk-button');
 
-      document.querySelector('.vk-button').classList.toggle('hidden');
+      if (!vkButton.classList.contains('hidden')) vkButton.classList.add('hidden');
       infoDiv.classList.toggle('hidden');
 
       VK.Api.call('users.get', { user_ids: id }, function (r) {
@@ -191,7 +192,7 @@ var VKApi = function () {
         var list = infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
           console.log(r.response);
-          r.response.items.forEach(function (item, i) {
+          r.response.forEach(function (item, i) {
             list[i].innerHTML = item.first_name + ' ' + item.last_name;
           });
         }
