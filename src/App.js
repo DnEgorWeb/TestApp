@@ -1,15 +1,23 @@
 'use strict';
 
 class VKApi {
-  constructor() {
-    this._el = document.getElementById('root');
+  constructor(options) {
+    this._el = options.el;
 
-    this._el.addEventListener('load', this._checkLogin.bind(this));
+    this._checkLogin();
   }
 
   _checkLogin() {
-    VK.Auth.getLoginStatus((response) => {
+    VK.init({
+      apiId: 6253982
+    });
+
+    VK.Auth.getLoginStatus(function(response) {
       console.log(response);
     });
   }
 }
+
+new VKApi({
+  el: document.getElementById('root')
+});

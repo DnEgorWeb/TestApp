@@ -155,17 +155,21 @@ var _createClass3 = _interopRequireDefault(_createClass2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VKApi = function () {
-  function VKApi() {
+  function VKApi(options) {
     (0, _classCallCheck3.default)(this, VKApi);
 
-    this._el = document.getElementById('root');
+    this._el = options.el;
 
-    this._el.addEventListener('load', this._checkLogin.bind(this));
+    this._checkLogin();
   }
 
   (0, _createClass3.default)(VKApi, [{
     key: '_checkLogin',
     value: function _checkLogin() {
+      VK.init({
+        apiId: 6253982
+      });
+
       VK.Auth.getLoginStatus(function (response) {
         console.log(response);
       });
@@ -173,6 +177,10 @@ var VKApi = function () {
   }]);
   return VKApi;
 }();
+
+new VKApi({
+  el: document.getElementById('root')
+});
 
 /***/ }),
 /* 7 */
