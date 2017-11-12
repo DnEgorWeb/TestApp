@@ -183,6 +183,7 @@ var VKApi = function () {
       VK.Api.call('users.get', { user_ids: id }, function (r) {
         if (r.response) {
           name = r.response[0].first_name + ' ' + r.response[0].last_name;
+          console.log(name);
         }
       });
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
@@ -190,10 +191,9 @@ var VKApi = function () {
           r.response.forEach(function (item) {
             friends.push(item);
           });
+          console.log(friends);
         }
       });
-
-      console.log(name, friends);
     }
   }, {
     key: '_checkLogin',

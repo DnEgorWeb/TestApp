@@ -24,17 +24,17 @@ class VKApi {
     VK.Api.call('users.get', {user_ids: id}, function(r) {
       if(r.response) {
         name = `${r.response[0].first_name} ${r.response[0].last_name}`;
+        console.log(name);
       }
     });
     VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5}, function(r) {
       if(r.response) {
         r.response.forEach((item) => {
           friends.push(item);
-        })
+        });
+        console.log(friends);
       }
     });
-
-    console.log(name, friends);
   }
 
   _checkLogin() {
