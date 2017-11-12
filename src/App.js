@@ -6,8 +6,6 @@ class VKApi {
 
     this._checkLogin();
 
-    this._button = this._el.querySelector('.vk-button');
-    this._infoDiv = this._el.querySelector('.vk-information');
     this._el.addEventListener('click', () => {
       VK.Auth.login((response) => {
         if (response.session) {
@@ -18,17 +16,19 @@ class VKApi {
   }
 
   _getUsersFriends(id) {
-    this._button.classList.toggle('hidden');
-    this._infoDiv.classList.toggle('hidden');
+    const infoDiv = document.querySelector('.vk-information');
+
+    document.querySelector('.vk-button').classList.toggle('hidden');
+    infoDiv.classList.toggle('hidden');
 
     VK.Api.call('users.get', {user_ids: id}, (r) => {
       if(r.response) {
         let name = `${r.response[0].first_name} ${r.response[0].last_name}`;
-        this._infoDiv.querySelector('.vk-header').innerHTML = name;
+        infoDiv.querySelector('.vk-header').innerHTML = name;
       }
     });
     VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5}, (r) => {
-      const list = this._infoDiv.querySelector('.vk-friends').children;
+      const list = infoDiv.querySelector('.vk-friends').children;
       if(r.response) {
         console.log(r.response);
         r.response.items.forEach((item, i) => {
@@ -47,9 +47,9 @@ class VKApi {
 
     VK.Auth.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        self._getUsersFriends.bind(self, response.session.mid);
+        self._getUsersFriends(response.session.mid);
       } else {
-        self._button.classList.toggle('hidden');
+        document.querySelector('.vk-button').classList.toggle('hidden');
       }
     });
   }

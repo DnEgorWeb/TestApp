@@ -164,8 +164,6 @@ var VKApi = function () {
 
     this._checkLogin();
 
-    this._button = this._el.querySelector('.vk-button');
-    this._infoDiv = this._el.querySelector('.vk-information');
     this._el.addEventListener('click', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
@@ -178,19 +176,19 @@ var VKApi = function () {
   (0, _createClass3.default)(VKApi, [{
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
-      var _this2 = this;
+      var infoDiv = document.querySelector('.vk-information');
 
-      this._button.classList.toggle('hidden');
-      this._infoDiv.classList.toggle('hidden');
+      document.querySelector('.vk-button').classList.toggle('hidden');
+      infoDiv.classList.toggle('hidden');
 
       VK.Api.call('users.get', { user_ids: id }, function (r) {
         if (r.response) {
           var name = r.response[0].first_name + ' ' + r.response[0].last_name;
-          _this2._infoDiv.querySelector('.vk-header').innerHTML = name;
+          infoDiv.querySelector('.vk-header').innerHTML = name;
         }
       });
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
-        var list = _this2._infoDiv.querySelector('.vk-friends').children;
+        var list = infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
           console.log(r.response);
           r.response.items.forEach(function (item, i) {
@@ -210,9 +208,9 @@ var VKApi = function () {
 
       VK.Auth.getLoginStatus(function (response) {
         if (response.status === 'connected') {
-          self._getUsersFriends.bind(self, response.session.mid);
+          self._getUsersFriends(response.session.mid);
         } else {
-          self._button.classList.toggle('hidden');
+          document.querySelector('.vk-button').classList.toggle('hidden');
         }
       });
     }
