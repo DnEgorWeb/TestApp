@@ -33,7 +33,8 @@ class VKApi {
       if(r.response) {
         console.log(r);
         r.response.forEach((item, i) => {
-          list[i].innerHTML = `${item.first_name} ${item.last_name}`;
+          list[i].firstElementChild.src = item.photo;
+          list[i].lastElementChild.innerHTML = `${item.first_name} ${item.last_name}`;
         });
       }
     });

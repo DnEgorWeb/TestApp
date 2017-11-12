@@ -193,7 +193,8 @@ var VKApi = function () {
         if (r.response) {
           console.log(r);
           r.response.forEach(function (item, i) {
-            list[i].innerHTML = item.first_name + ' ' + item.last_name;
+            list[i].firstElementChild.src = item.photo;
+            list[i].lastElementChild.innerHTML = item.first_name + ' ' + item.last_name;
           });
         }
       });
