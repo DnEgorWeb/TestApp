@@ -13,7 +13,17 @@ class VKApi {
     });
 
     VK.Auth.getLoginStatus(function(response) {
-      console.log(response);
+      if (response.status === 'connected') {
+
+      } else {
+        VK.Auth.login(function(response) {
+          if (response.session) {
+            console.log(response.session);
+          } else {
+            console.log("-");
+          }
+        });
+      }
     });
   }
 }
