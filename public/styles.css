@@ -34,6 +34,11 @@
 }
 
 .vk-friends>li {
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
+}
+
+.vk-friends>span {
+    margin-left: 10px;
 }
