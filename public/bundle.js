@@ -216,7 +216,7 @@ var VKApi = function () {
         if (response.session) {
           _this._getUsersFriends(response.session.mid);
         }
-        _this._el.removeEventListener('click', _this._handleClick);
+        _this._el.removeEventListener('click', _this._handleClick.bind(_this));
       });
     }
   }]);
