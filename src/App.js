@@ -5,13 +5,14 @@ class VKApi {
     this._el = options.el;
 
     this._checkLogin();
+  }
 
-    this._el.addEventListener('login', () => {
-      VK.Auth.login(function(response) {
-        if (response.session) {
-          location.reload();
-        }
-      });
+  _login() {
+    VK.Auth.login(function(response) {
+      if (response.session) {
+        console.log(1);
+        location.reload();
+      }
     });
   }
 
@@ -46,8 +47,7 @@ class VKApi {
       if (response.status === 'connected') {
         self._getUsersFriends(response.session.mid);
       } else {
-        const event = new Event('login');
-        self._el.dispatchEvent(event);
+        self._login();
       }
     });
   }
