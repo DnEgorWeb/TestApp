@@ -171,7 +171,9 @@ var VKApi = function () {
       });
 
       VK.Auth.getLoginStatus(function (response) {
-        if (response.status === 'connected') {} else {
+        if (response.status === 'connected') {
+          console.log(response);
+        } else {
           VK.Auth.login(function (response) {
             if (response.session) {
               console.log(response.session);
