@@ -8,11 +8,9 @@ class VKApi {
 
     this._button = this._el.querySelector('.vk-button');
     this._el.addEventListener('click', () => {
-      VK.Auth.login(function(response) {
+      VK.Auth.login((response) => {
         if (response.session) {
-          console.log(response.session);
-        } else {
-          console.log(response);
+          this._getUsersFriends(response.session.mid);
         }
       });
     });
