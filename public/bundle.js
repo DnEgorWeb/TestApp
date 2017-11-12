@@ -170,6 +170,8 @@ var VKApi = function () {
         if (response.session) {
           console.log(1);
           location.reload();
+        } else {
+          console.log(response);
         }
       });
     }

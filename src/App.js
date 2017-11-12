@@ -12,6 +12,8 @@ class VKApi {
       if (response.session) {
         console.log(1);
         location.reload();
+      } else {
+        console.log(response);
       }
     });
   }
