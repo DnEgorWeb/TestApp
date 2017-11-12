@@ -180,6 +180,7 @@ var VKApi = function () {
     value: function _getUsersFriends(id) {
       var _this2 = this;
 
+      this._button.classList.toggle('hidden');
       this._infoDiv.classList.toggle('hidden');
 
       VK.Api.call('users.get', { user_ids: id }, function (r) {
@@ -191,7 +192,7 @@ var VKApi = function () {
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
         var list = _this2._infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
-          r.response.forEach(function (item, i) {
+          r.response.items.forEach(function (item, i) {
             list[i].innerHTML = item.first_name + ' ' + item.last_name;
           });
         }
