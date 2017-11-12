@@ -11,6 +11,7 @@ class VKApi {
         if (response.session) {
           this._getUsersFriends(response.session.mid);
         }
+        this._el.removeEventListener('click');
       });
     });
   }

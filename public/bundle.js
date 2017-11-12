@@ -169,6 +169,7 @@ var VKApi = function () {
         if (response.session) {
           _this._getUsersFriends(response.session.mid);
         }
+        _this._el.removeEventListener('click');
       });
     });
   }
