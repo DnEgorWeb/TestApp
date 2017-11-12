@@ -49,7 +49,7 @@ class VKApi {
       if (response.status === 'connected') {
         self._getUsersFriends(response.session.mid);
       } else {
-        this._button.classList.toggle('hidden');
+        self._button.classList.toggle('hidden');
       }
     });
   }
