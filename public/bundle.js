@@ -156,22 +156,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var VKApi = function () {
   function VKApi(options) {
-    var _this = this;
-
     (0, _classCallCheck3.default)(this, VKApi);
 
     this._el = options.el;
 
     this._checkLogin();
 
-    this._el.addEventListener('click', function () {
-      VK.Auth.login(function (response) {
-        if (response.session) {
-          _this._getUsersFriends(response.session.mid);
-        }
-        _this._el.removeEventListener('click');
-      });
-    });
+    this._el.addEventListener('click', this._handleClick.bind(this));
   }
 
   (0, _createClass3.default)(VKApi, [{
@@ -214,6 +205,18 @@ var VKApi = function () {
         } else {
           document.querySelector('.vk-button').classList.toggle('hidden');
         }
+      });
+    }
+  }, {
+    key: '_handleClick',
+    value: function _handleClick() {
+      var _this = this;
+
+      VK.Auth.login(function (response) {
+        if (response.session) {
+          _this._getUsersFriends(response.session.mid);
+        }
+        _this._el.removeEventListener('click', _this._handleClick);
       });
     }
   }]);

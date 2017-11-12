@@ -6,14 +6,7 @@ class VKApi {
 
     this._checkLogin();
 
-    this._el.addEventListener('click', () => {
-      VK.Auth.login((response) => {
-        if (response.session) {
-          this._getUsersFriends(response.session.mid);
-        }
-        this._el.removeEventListener('click');
-      });
-    });
+    this._el.addEventListener('click', this._handleClick.bind(this));
   }
 
   _getUsersFriends(id) {
@@ -53,6 +46,15 @@ class VKApi {
       } else {
         document.querySelector('.vk-button').classList.toggle('hidden');
       }
+    });
+  }
+
+  _handleClick() {
+    VK.Auth.login((response) => {
+      if (response.session) {
+        this._getUsersFriends(response.session.mid);
+      }
+      this._el.removeEventListener('click', this._handleClick);
     });
   }
 }
