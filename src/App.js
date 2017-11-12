@@ -7,6 +7,7 @@ class VKApi {
     this._checkLogin();
 
     this._button = this._el.querySelector('.vk-button');
+    this._infoDiv = this._el.querySelector('.vk-information');
     this._el.addEventListener('click', () => {
       VK.Auth.login((response) => {
         if (response.session) {
@@ -17,21 +18,20 @@ class VKApi {
   }
 
   _getUsersFriends(id) {
-    let name;
-    const friends = [];
+    this._infoDiv.classList.toggle('hidden');
 
-    VK.Api.call('users.get', {user_ids: id}, function(r) {
+    VK.Api.call('users.get', {user_ids: id}, (r) => {
       if(r.response) {
-        name = `${r.response[0].first_name} ${r.response[0].last_name}`;
-        console.log(name);
+        let name = `${r.response[0].first_name} ${r.response[0].last_name}`;
+        this._infoDiv.querySelector('.vk-header').innerHTML = name;
       }
     });
-    VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5}, function(r) {
+    VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5}, (r) => {
+      const list = this._infoDiv.querySelector('.vk-friends').children;
       if(r.response) {
-        r.response.forEach((item) => {
-          friends.push(item);
+        r.response.forEach((item, i) => {
+          list[i].innerHTML = `${item.first_name} ${item.last_name}`;
         });
-        console.log(friends);
       }
     });
   }

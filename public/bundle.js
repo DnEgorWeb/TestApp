@@ -165,6 +165,7 @@ var VKApi = function () {
     this._checkLogin();
 
     this._button = this._el.querySelector('.vk-button');
+    this._infoDiv = this._el.querySelector('.vk-information');
     this._el.addEventListener('click', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
@@ -177,21 +178,22 @@ var VKApi = function () {
   (0, _createClass3.default)(VKApi, [{
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
-      var name = void 0;
-      var friends = [];
+      var _this2 = this;
+
+      this._infoDiv.classList.toggle('hidden');
 
       VK.Api.call('users.get', { user_ids: id }, function (r) {
         if (r.response) {
-          name = r.response[0].first_name + ' ' + r.response[0].last_name;
-          console.log(name);
+          var name = r.response[0].first_name + ' ' + r.response[0].last_name;
+          _this2._infoDiv.querySelector('.vk-header').innerHTML = name;
         }
       });
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
+        var list = _this2._infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
-          r.response.forEach(function (item) {
-            friends.push(item);
+          r.response.forEach(function (item, i) {
+            list[i].innerHTML = item.first_name + ' ' + item.last_name;
           });
-          console.log(friends);
         }
       });
     }

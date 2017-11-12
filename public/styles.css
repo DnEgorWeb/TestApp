@@ -9,13 +9,27 @@
     text-transform: uppercase;
     cursor: pointer;
     padding: 5px 10px;
-    background-color: #0000bf;
+    background-color: #597da3;
     color: white;
-    -webkit-box-shadow: 2px 2px 5px #13afcc;
-    -moz-box-shadow: 2px 2px 5px #13afcc;
-    box-shadow: 2px 2px 5px #13afcc;
+    -webkit-box-shadow: 2px 2px 5px #4e7298;
+    -moz-box-shadow: 2px 2px 5px #4e7298;
+    box-shadow: 2px 2px 5px #4e7298;
 }
 
+.vk-information {
+    background-color: #597da3;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.vk-information.hidden,
 .vk-button.hidden {
     display: none;
+}
+
+.vk-friends {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
 }
