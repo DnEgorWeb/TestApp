@@ -191,7 +191,7 @@ var VKApi = function () {
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
         var list = infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
-          console.log(r.response);
+          console.log(r);
           r.response.forEach(function (item, i) {
             list[i].innerHTML = item.first_name + ' ' + item.last_name;
           });
