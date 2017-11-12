@@ -164,23 +164,39 @@ var VKApi = function () {
   }
 
   (0, _createClass3.default)(VKApi, [{
+    key: '_login',
+    value: function _login() {
+      VK.Auth.login(function (response) {
+        if (response.session) {
+          self._getUsersFriends(response.session.mid);
+        } else {
+          console.log("no session");
+        }
+      });
+    }
+  }, {
+    key: '_getUsersFriends',
+    value: function _getUsersFriends(id) {
+      VK.Api.call('users.get', { user_ids: id }, function (r) {
+        if (r.response) {
+          console.log(r.response[0].first_name + ' ' + r.response[0].last_name);
+        }
+      });
+    }
+  }, {
     key: '_checkLogin',
     value: function _checkLogin() {
+      var self = this;
+
       VK.init({
         apiId: 6253982
       });
 
       VK.Auth.getLoginStatus(function (response) {
         if (response.status === 'connected') {
-          console.log(response);
+          self._getUsersFriends(response.session.mid);
         } else {
-          VK.Auth.login(function (response) {
-            if (response.session) {
-              console.log(response.session);
-            } else {
-              console.log("-");
-            }
-          });
+          self._login();
         }
       });
     }
