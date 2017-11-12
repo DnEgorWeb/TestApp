@@ -7,7 +7,7 @@ class VKApi {
     this._checkLogin();
 
     this._button = this._el.querySelector('.vk-button');
-    this._button.addEventListener('click', () => {
+    this._el.addEventListener('click', () => {
       VK.Auth.login(function(response) {
         if (response.session) {
           console.log(response.session);

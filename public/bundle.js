@@ -163,7 +163,7 @@ var VKApi = function () {
     this._checkLogin();
 
     this._button = this._el.querySelector('.vk-button');
-    this._button.addEventListener('click', function () {
+    this._el.addEventListener('click', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
           console.log(response.session);
