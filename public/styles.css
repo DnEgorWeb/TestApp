@@ -1,0 +1,21 @@
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.vk-button {
+    border: none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 5px 10px;
+    background-color: #0000bf;
+    color: white;
+    -webkit-box-shadow: 2px 2px 5px #13afcc;
+    -moz-box-shadow: 2px 2px 5px #13afcc;
+    box-shadow: 2px 2px 5px #13afcc;
+}
+
+.vk-button.hidden {
+    display: none;
+}

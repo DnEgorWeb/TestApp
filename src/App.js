@@ -5,16 +5,16 @@ class VKApi {
     this._el = options.el;
 
     this._checkLogin();
-  }
 
-  _login() {
-    VK.Auth.login(function(response) {
-      if (response.session) {
-        console.log(1);
-        location.reload();
-      } else {
-        console.log(response);
-      }
+    this._button = this._el.querySelector('.vk-button');
+    this._button.addEventListener('click', () => {
+      VK.Auth.login(function(response) {
+        if (response.session) {
+          console.log(response.session);
+        } else {
+          console.log(response);
+        }
+      });
     });
   }
 
@@ -49,7 +49,7 @@ class VKApi {
       if (response.status === 'connected') {
         self._getUsersFriends(response.session.mid);
       } else {
-        self._login();
+        this._button.classList.toggle('hidden');
       }
     });
   }

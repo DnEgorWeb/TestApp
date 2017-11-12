@@ -161,21 +161,20 @@ var VKApi = function () {
     this._el = options.el;
 
     this._checkLogin();
-  }
 
-  (0, _createClass3.default)(VKApi, [{
-    key: '_login',
-    value: function _login() {
+    this._button = this._el.querySelector('.vk-button');
+    this._button.addEventListener('click', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
-          console.log(1);
-          location.reload();
+          console.log(response.session);
         } else {
           console.log(response);
         }
       });
-    }
-  }, {
+    });
+  }
+
+  (0, _createClass3.default)(VKApi, [{
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
       var name = void 0;
@@ -209,7 +208,7 @@ var VKApi = function () {
         if (response.status === 'connected') {
           self._getUsersFriends(response.session.mid);
         } else {
-          self._login();
+          this._button.classList.toggle('hidden');
         }
       });
     }
