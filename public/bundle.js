@@ -168,9 +168,7 @@ var VKApi = function () {
     value: function _login() {
       VK.Auth.login(function (response) {
         if (response.session) {
-          self._getUsersFriends(response.session.mid);
-        } else {
-          console.log("no session");
+          location.reload();
         }
       });
     }
