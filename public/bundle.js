@@ -177,11 +177,23 @@ var VKApi = function () {
   }, {
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
+      var name = void 0;
+      var friends = [];
+
       VK.Api.call('users.get', { user_ids: id }, function (r) {
         if (r.response) {
-          console.log(r.response[0].first_name + ' ' + r.response[0].last_name);
+          name = r.response[0].first_name + ' ' + r.response[0].last_name;
         }
       });
+      VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
+        if (r.response) {
+          r.response.forEach(function (item) {
+            friends.push(item);
+          });
+        }
+      });
+
+      console.log(name, friends);
     }
   }, {
     key: '_checkLogin',
