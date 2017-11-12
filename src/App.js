@@ -6,14 +6,12 @@ class VKApi {
 
     this._checkLogin();
 
-    this._el.addEventListener('login', this._login.bind(this));
-  }
-
-  _login() {
-    VK.Auth.login(function(response) {
-      if (response.session) {
-        location.reload();
-      }
+    this._el.addEventListener('login', () => {
+      VK.Auth.login(function(response) {
+        if (response.session) {
+          location.reload();
+        }
+      });
     });
   }
 

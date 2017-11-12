@@ -162,19 +162,16 @@ var VKApi = function () {
 
     this._checkLogin();
 
-    this._el.addEventListener('login', this._login.bind(this));
-  }
-
-  (0, _createClass3.default)(VKApi, [{
-    key: '_login',
-    value: function _login() {
+    this._el.addEventListener('login', function () {
       VK.Auth.login(function (response) {
         if (response.session) {
           location.reload();
         }
       });
-    }
-  }, {
+    });
+  }
+
+  (0, _createClass3.default)(VKApi, [{
     key: '_getUsersFriends',
     value: function _getUsersFriends(id) {
       var name = void 0;
