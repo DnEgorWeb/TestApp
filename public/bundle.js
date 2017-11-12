@@ -161,6 +161,8 @@ var VKApi = function () {
     this._el = options.el;
 
     this._checkLogin();
+
+    this._el.addEventListener('login', this._login.bind(this));
   }
 
   (0, _createClass3.default)(VKApi, [{
@@ -206,7 +208,8 @@ var VKApi = function () {
         if (response.status === 'connected') {
           self._getUsersFriends(response.session.mid);
         } else {
-          self._login();
+          var event = new Event('login');
+          self._el.dispatchEvent(event);
         }
       });
     }

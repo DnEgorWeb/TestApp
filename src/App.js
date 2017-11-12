@@ -5,6 +5,8 @@ class VKApi {
     this._el = options.el;
 
     this._checkLogin();
+
+    this._el.addEventListener('login', this._login.bind(this));
   }
 
   _login() {
@@ -46,7 +48,8 @@ class VKApi {
       if (response.status === 'connected') {
         self._getUsersFriends(response.session.mid);
       } else {
-        self._login();
+        const event = new Event('login');
+        self._el.dispatchEvent(event);
       }
     });
   }
