@@ -37,5 +37,8 @@
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+}
+
+.vk-friends>li>img {
+    margin-right: 5px;
 }
