@@ -192,6 +192,7 @@ var VKApi = function () {
       VK.Api.call('friends.get', { user_ids: id, order: 'random', count: 5 }, function (r) {
         var list = _this2._infoDiv.querySelector('.vk-friends').children;
         if (r.response) {
+          console.log(r.response);
           r.response.items.forEach(function (item, i) {
             list[i].innerHTML = item.first_name + ' ' + item.last_name;
           });
@@ -209,7 +210,7 @@ var VKApi = function () {
 
       VK.Auth.getLoginStatus(function (response) {
         if (response.status === 'connected') {
-          self._getUsersFriends(response.session.mid);
+          self._getUsersFriends.bind(self, response.session.mid);
         } else {
           self._button.classList.toggle('hidden');
         }

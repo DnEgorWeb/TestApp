@@ -30,6 +30,7 @@ class VKApi {
     VK.Api.call('friends.get', {user_ids: id, order: 'random', count: 5}, (r) => {
       const list = this._infoDiv.querySelector('.vk-friends').children;
       if(r.response) {
+        console.log(r.response);
         r.response.items.forEach((item, i) => {
           list[i].innerHTML = `${item.first_name} ${item.last_name}`;
         });
@@ -46,7 +47,7 @@ class VKApi {
 
     VK.Auth.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        self._getUsersFriends(response.session.mid);
+        self._getUsersFriends.bind(self, response.session.mid);
       } else {
         self._button.classList.toggle('hidden');
       }
